@@ -12,15 +12,19 @@ if [ "$PEERKEY" == "" ]; then
 	exit
 fi
 
+if [ "$PEERADDR" != "" ]; then
+	PEERCMD="endpoint $PEERADDR"
+fi
+
 echo "Adding interface 'wg0'"
 ip link add dev wg0 type wireguard
 
 echo "Adding IP range for 'wg0'"
-ip addr add dev wg0 192.168.0.1/16
+ip addr add dev wg0 $OWNIP/$BLOCKSIZE
 
 echo "Setting up wireguard-specific options"
 echo "$PRIVKEY" > /tmp/privkey
-wg set wg0 private-key /tmp/privkey listen-port 12345 peer $PEERKEY allowed-ips 192.168.0.0/16
+wg set wg0 private-key /tmp/privkey listen-port $LPORT peer $PEERKEY allowed-ips $OWNIP/$BLOCKSIZE $PEERCMD
 
 echo "Setting interface 'wg0' up"
 ip link set up wg0
