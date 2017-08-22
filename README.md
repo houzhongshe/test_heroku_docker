@@ -11,7 +11,7 @@ This is the most simple command to run the container. This will create a private
 ## Environment variables
 
 | Name | Required | Default | Explanation | Example
-| - | - | - | - | - |
+| --- | --- | --- | --- | --- |
 | PRIVKEY | No | Generating a new private key | The private key for the container wireguard entpoint | `base64 gibberish` |
 | PEERKEY | Yes | (none) | The public key of your endpoint | `base64 gibberish` |
 | LPORT | No | 12345 | The port to listen for connections | 51423 |
