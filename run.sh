@@ -31,6 +31,7 @@ ip link set up wg0
 
 echo "Entering eternal loop, goodbye ,o/"
 
-while sleep 1; do
+while sleep 60; do
+	date
 	wg show
 done
